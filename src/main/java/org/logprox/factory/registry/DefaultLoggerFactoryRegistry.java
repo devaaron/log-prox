@@ -1,20 +1,27 @@
 package org.logprox.factory.registry;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import org.logprox.factory.LoggerFactoryBean;
+import org.logprox.factory.LoggerProxyFactory;
 
 @SuppressWarnings("rawtypes")
 public class DefaultLoggerFactoryRegistry implements LoggerFactoryRegistry {
 
-	Set<LoggerFactoryBean> factories;
+	Set<LoggerProxyFactory> factories;
 	
+	@SuppressWarnings("serial")
+	public DefaultLoggerFactoryRegistry(final LoggerProxyFactory initialFactory) {
+		super();
+		factories = new HashSet<LoggerProxyFactory>(){{add(initialFactory);}};
+	}
+
 	@Override
-	public Set<LoggerFactoryBean> retrieveFactories() {
+	public Set<LoggerProxyFactory> retrieveFactories() {
 		return factories; 
 	}
 	
-	public void add(LoggerFactoryBean factory){
+	public void add(LoggerProxyFactory factory){
 		factories.add(factory);
 	}
 }

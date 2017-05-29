@@ -1,19 +1,19 @@
 package org.logprox.simple;
 
-import org.logprox.factory.LoggerFactoryBean;
+import org.logprox.factory.LoggerProxyFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SimpleLoggerProxyFactory implements LoggerFactoryBean<SimpleLoggerProxy>{
+public class SimpleLoggerProxyFactory implements LoggerProxyFactory<SimpleAbstractLoggerProxy>{
 
 	@Override
-	public SimpleLoggerProxy getLogger(Class<?> clazz) {
-		return new SimpleLoggerProxy(clazz);
+	public SimpleAbstractLoggerProxy getLogger(Class<?> clazz) {
+		return new SimpleLoggerProxyImpl(clazz);
 	}
 
 	@Override
-	public Class<SimpleLoggerProxy> getReturnType() {
-		return SimpleLoggerProxy.class;
+	public Class<SimpleAbstractLoggerProxy> getReturnType() {
+		return SimpleAbstractLoggerProxy.class;
 	}
 
 	

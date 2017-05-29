@@ -3,7 +3,7 @@ package org.logprox.factory.registry;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.logprox.factory.LoggerFactoryBean;
+import org.logprox.factory.LoggerProxyFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -13,7 +13,7 @@ public class SpringLoggerFactoryRegistry implements ApplicationContextAware, Log
 
 	ApplicationContext context;
 	@SuppressWarnings("rawtypes")
-	Class<LoggerFactoryBean> clazz = LoggerFactoryBean.class;
+	Class<LoggerProxyFactory> clazz = LoggerProxyFactory.class;
 	
 	
 	@Autowired
@@ -24,10 +24,10 @@ public class SpringLoggerFactoryRegistry implements ApplicationContextAware, Log
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public Set<LoggerFactoryBean> retrieveFactories(){
-		Set<LoggerFactoryBean> returnValue = new HashSet<LoggerFactoryBean>();
+	public Set<LoggerProxyFactory> retrieveFactories(){
+		Set<LoggerProxyFactory> returnValue = new HashSet<LoggerProxyFactory>();
 		for(String beanName : context.getBeanNamesForType(clazz)){
-			returnValue.add((LoggerFactoryBean) context.getBean(beanName));
+			returnValue.add((LoggerProxyFactory) context.getBean(beanName));
 		}
 		return returnValue;
 	}
